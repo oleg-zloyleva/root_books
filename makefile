@@ -25,17 +25,17 @@ help: #prints list of commands
 ###                               ###
 #####################################
 
-start: #start docker container
-	@sudo docker-compose up -d
-
 start_local: #start docker container for LOCAL ENV
 	@sudo docker-compose -f docker-compose.yml -f docker-compose-local.yml up -d
 
-stop: #stop docker container
-	@sudo docker-compose down
+start_prod: #start docker container for LOCAL ENV
+	@sudo docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
 
 stop_local: #stop docker container
 	@sudo docker-compose -f docker-compose.yml -f docker-compose-local.yml down
+
+stop_prod: #stop docker container
+	@sudo docker-compose -f docker-compose.yml -f docker-compose-prod.yml down
 
 show: #show docker's containers
 	@sudo docker ps

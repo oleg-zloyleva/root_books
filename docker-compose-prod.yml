@@ -15,7 +15,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./powerliftguru.com/:/var/www/powerliftguru.com/
+      - ./powerliftguru.com/:/var/www/
       - ./powerliftguru.com/docker/nginx/powerliftguru.conf:/etc/nginx/conf.d/powerliftguru.conf
 
       - /etc/letsencrypt:/etc/letsencrypt
