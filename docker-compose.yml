@@ -1,0 +1,70 @@
+version: '3'
+services:
+
+#######################################################################
+####################   powerliftguru   ################################
+#######################################################################
+
+  #NodeJS Service
+  powerliftguru_com_nodejs:
+    build:
+      context: .
+      dockerfile: ./powerliftguru.com/docker/nodejs/Dockerfile
+    container_name: "${DOCKER_PREFIX}-powerliftguru-nodejs"
+    depends_on:
+      - powerliftguru_com_web
+    volumes:
+      - ./powerliftguru.com/:/var/www/
+    networks:
+      - app-network
+
+  #PHP Service
+  powerliftguru_com_web:
+    build:
+      context: .
+      dockerfile: ./powerliftguru.com/docker/php-fpm/Dockerfile
+    image: digitalocean.com/php
+    container_name: "powerliftguru_com-app"
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - db
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/
+    volumes:
+      - ./powerliftguru.com/:/var/www/
+      - ./powerliftguru.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+    networks:
+      - app-network
+
+#######################################################################
+#######################   Services   ##################################
+#######################################################################
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: "${DOCKER_PREFIX}-db"
+    restart: unless-stopped
+    tty: true
+#    command: --init-file /etc/mysql/init.sql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./docker/mysql/:/etc/mysql/
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:

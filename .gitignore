@@ -1,0 +1,11 @@
+.env
+.env.local
+
+.idea/
+
+Docs/
+
+api/
+
+fillingyoga.com/
+powerliftguru.com/

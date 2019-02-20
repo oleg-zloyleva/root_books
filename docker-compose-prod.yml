@@ -1,0 +1,28 @@
+version: '3'
+services:
+
+#  ##############   WEB CONTAINERS powerliftguru_com  ##############
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: "${DOCKER_PREFIX}-webserver"
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - powerliftguru_com_web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./powerliftguru.com/:/var/www/powerliftguru.com/
+      - ./powerliftguru.com/docker/nginx/powerliftguru.conf:/etc/nginx/conf.d/powerliftguru.conf
+
+      - /etc/letsencrypt:/etc/letsencrypt
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
