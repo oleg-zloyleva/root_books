@@ -14,6 +14,7 @@ services:
       - fillingyoga_com_web
       - marathonexpert_com_web
       - yourdailyworkouts_com_web
+      - yourfitnesstrainer365_com_web
     ports:
       - "80:80"
       - "443:443"
@@ -31,6 +32,9 @@ services:
 
       - ./yourdailyworkouts.com/:/var/www/yourdailyworkouts.com/
       - ./yourdailyworkouts.com/docker/nginx/yourdailyworkouts.conf:/etc/nginx/conf.d/yourdailyworkouts.conf
+
+      - ./yourfitnesstrainer365.com/:/var/www/yourfitnesstrainer365.com/
+      - ./yourfitnesstrainer365.com/docker/nginx/yourfitnesstrainer365.conf:/etc/nginx/conf.d/yourfitnesstrainer365.conf
 
       - /etc/letsencrypt:/etc/letsencrypt
     networks:

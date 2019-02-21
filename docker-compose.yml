@@ -55,6 +55,32 @@ services:
 
 
   #######################################################################
+  ####################  yourfitnesstrainer365.com  ################################
+  #######################################################################
+
+  #PHP Service
+  yourfitnesstrainer365_com_web:
+    build:
+      context: .
+      dockerfile: ./yourfitnesstrainer365.com/docker/php-fpm/Dockerfile
+    image: digitalocean.com/php
+    container_name: "yourfitnesstrainer365_com-app"
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - db
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/yourfitnesstrainer365.com/
+    volumes:
+      - ./yourfitnesstrainer365.com/:/var/www/yourfitnesstrainer365.com/
+      - ./yourfitnesstrainer365.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+    networks:
+      - app-network
+
+
+  #######################################################################
   ####################  fillingyoga.com  ################################
   #######################################################################
 
