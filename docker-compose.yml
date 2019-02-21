@@ -31,19 +31,6 @@ services:
   #################### powerliftguru.com ################################
   #######################################################################
 
-  #NodeJS Service
-  powerliftguru_com_nodejs:
-    build:
-      context: .
-      dockerfile: ./powerliftguru.com/docker/nodejs/Dockerfile
-    container_name: "${DOCKER_PREFIX}-powerliftguru-nodejs"
-    depends_on:
-      - powerliftguru_com_web
-    volumes:
-      - ./powerliftguru.com/:/var/www/
-    networks:
-      - app-network
-
   #PHP Service
   powerliftguru_com_web:
     build:
