@@ -12,6 +12,7 @@ services:
     depends_on:
       - powerliftguru_com_web
       - fillingyoga_com_web
+      - marathonexpert_com_web
     ports:
       - "80:80"
       - "443:443"
@@ -23,6 +24,9 @@ services:
 
       - ./fillingyoga.com/:/var/www/fillingyoga.com/
       - ./fillingyoga.com/docker/nginx/fillingyoga.conf:/etc/nginx/conf.d/fillingyoga.conf
+
+      - ./marathonexpert.com/:/var/www/marathonexpert.com/
+      - ./marathonexpert.com/docker/nginx/marathonexpert.conf:/etc/nginx/conf.d/marathonexpert.conf
 
       - /etc/letsencrypt:/etc/letsencrypt
     networks:

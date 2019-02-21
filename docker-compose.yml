@@ -2,6 +2,32 @@ version: '3'
 services:
 
   #######################################################################
+  ####################  marathonexpert.com  ################################
+  #######################################################################
+
+
+  #PHP Service
+  marathonexpert_com_web:
+    build:
+      context: .
+      dockerfile: ./marathonexpert.com/docker/php-fpm/Dockerfile
+    image: digitalocean.com/php
+    container_name: "marathonexpert_com-app"
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - db
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/marathonexpert.com/
+    volumes:
+      - ./marathonexpert.com/:/var/www/marathonexpert.com/
+      - ./marathonexpert.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+    networks:
+      - app-network
+
+  #######################################################################
   ####################  fillingyoga.com  ################################
   #######################################################################
 
