@@ -1,7 +1,7 @@
 version: '3'
 services:
 
-#  ##############   WEB CONTAINERS powerliftguru_com  ##############
+#  ##############   WEB CONTAINERS   ##############
 
   #Nginx Service
   webserver:
@@ -11,12 +11,16 @@ services:
     tty: true
     depends_on:
       - powerliftguru_com_web
+      - fillingyoga_com_web
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./powerliftguru.com/:/var/www/
+      - ./powerliftguru.com/:/var/www/powerliftguru.com/
       - ./powerliftguru.com/docker/nginx/powerliftguru.conf:/etc/nginx/conf.d/powerliftguru.conf
+
+      - ./fillingyoga.com/:/var/www/fillingyoga.com/
+      - ./fillingyoga.com/docker/nginx/fillingyoga.conf:/etc/nginx/conf.d/fillingyoga.conf
 
       - /etc/letsencrypt:/etc/letsencrypt
     networks:

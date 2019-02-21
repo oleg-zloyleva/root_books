@@ -1,9 +1,35 @@
 version: '3'
 services:
 
-#######################################################################
-####################   powerliftguru   ################################
-#######################################################################
+  #######################################################################
+  ####################  fillingyoga.com  ################################
+  #######################################################################
+
+
+  #PHP Service
+  fillingyoga_com_web:
+    build:
+      context: .
+      dockerfile: ./fillingyoga.com/docker/php-fpm/Dockerfile
+    image: digitalocean.com/php
+    container_name: "fillingyoga_com-app"
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - db
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/fillingyoga.com/
+    volumes:
+      - ./fillingyoga.com/:/var/www/fillingyoga.com/
+      - ./fillingyoga.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+    networks:
+      - app-network
+
+  #######################################################################
+  #################### powerliftguru.com ################################
+  #######################################################################
 
   #NodeJS Service
   powerliftguru_com_nodejs:
@@ -32,9 +58,9 @@ services:
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
-    working_dir: /var/www/
+    working_dir: /var/www/powerliftguru.com/
     volumes:
-      - ./powerliftguru.com/:/var/www/
+      - ./powerliftguru.com/:/var/www/powerliftguru.com/
       - ./powerliftguru.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
     networks:
       - app-network
