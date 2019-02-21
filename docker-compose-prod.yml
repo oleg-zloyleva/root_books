@@ -13,6 +13,7 @@ services:
       - powerliftguru_com_web
       - fillingyoga_com_web
       - marathonexpert_com_web
+      - yourdailyworkouts_com_web
     ports:
       - "80:80"
       - "443:443"
@@ -25,8 +26,8 @@ services:
       - ./fillingyoga.com/:/var/www/fillingyoga.com/
       - ./fillingyoga.com/docker/nginx/fillingyoga.conf:/etc/nginx/conf.d/fillingyoga.conf
 
-      - ./marathonexpert.com/:/var/www/marathonexpert.com/
-      - ./marathonexpert.com/docker/nginx/marathonexpert.conf:/etc/nginx/conf.d/marathonexpert.conf
+      - ./yourdailyworkouts.com/:/var/www/yourdailyworkouts.com/
+      - ./yourdailyworkouts.com/docker/nginx/yourdailyworkouts.conf:/etc/nginx/conf.d/yourdailyworkouts.conf
 
       - /etc/letsencrypt:/etc/letsencrypt
     networks:

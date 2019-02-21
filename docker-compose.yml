@@ -27,10 +27,36 @@ services:
     networks:
       - app-network
 
+
+  #######################################################################
+  ####################  yourdailyworkouts.com  ################################
+  #######################################################################
+
+  #PHP Service
+  yourdailyworkouts_com_web:
+    build:
+      context: .
+      dockerfile: ./yourdailyworkouts.com/docker/php-fpm/Dockerfile
+    image: digitalocean.com/php
+    container_name: "yourdailyworkouts_com-app"
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - db
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/yourdailyworkouts.com/
+    volumes:
+      - ./yourdailyworkouts.com/:/var/www/yourdailyworkouts.com/
+      - ./yourdailyworkouts.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+    networks:
+      - app-network
+
+
   #######################################################################
   ####################  fillingyoga.com  ################################
   #######################################################################
-
 
   #PHP Service
   fillingyoga_com_web:
