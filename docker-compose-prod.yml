@@ -16,6 +16,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+
       - ./powerliftguru.com/:/var/www/powerliftguru.com/
       - ./powerliftguru.com/docker/nginx/powerliftguru.conf:/etc/nginx/conf.d/powerliftguru.conf
 
