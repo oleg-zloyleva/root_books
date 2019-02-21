@@ -26,6 +26,9 @@ services:
       - ./fillingyoga.com/:/var/www/fillingyoga.com/
       - ./fillingyoga.com/docker/nginx/fillingyoga.conf:/etc/nginx/conf.d/fillingyoga.conf
 
+      - ./marathonexpert.com/:/var/www/marathonexpert.com/
+      - ./marathonexpert.com/docker/nginx/marathonexpert.conf:/etc/nginx/conf.d/marathonexpert.conf
+
       - ./yourdailyworkouts.com/:/var/www/yourdailyworkouts.com/
       - ./yourdailyworkouts.com/docker/nginx/yourdailyworkouts.conf:/etc/nginx/conf.d/yourdailyworkouts.conf
 
