@@ -2,6 +2,23 @@ version: '3'
 services:
 
   #######################################################################
+  ####################  fillingyoga.com  ################################
+  #######################################################################
+
+  #NodeJS Service
+  fillingyoga_com_nodejs:
+    build:
+      context: .
+      dockerfile: ./fillingyoga.com/docker/nodejs/Dockerfile
+    container_name: "${DOCKER_PREFIX}-fillingyoga-nodejs"
+    depends_on:
+      - fillingyoga_com_web
+    volumes:
+      - ./fillingyoga.com/:/var/www/
+    networks:
+      - app-network
+
+  #######################################################################
   #################### powerliftguru.com ################################
   #######################################################################
 
