@@ -40,6 +40,26 @@ services:
     networks:
       - app-network
 
+
+  #######################################################################
+  #######################   Services   ##################################
+  #######################################################################
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: "${DOCKER_PREFIX}-db"
+    restart: unless-stopped
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./docker/mysql/:/etc/mysql/
+    networks:
+      - app-network
+
 #Docker Networks
 networks:
   app-network:
