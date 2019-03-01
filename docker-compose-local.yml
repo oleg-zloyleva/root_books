@@ -19,6 +19,23 @@ services:
       - app-network
 
   #######################################################################
+  ###################  marathonexpert.com  ##############################
+  #######################################################################
+
+  #NodeJS Service
+  marathonexpert_com_nodejs:
+    build:
+      context: .
+      dockerfile: ./marathonexpert.com/docker/nodejs/Dockerfile
+    container_name: "${DOCKER_PREFIX}-marathonexpert-nodejs"
+    depends_on:
+      - marathonexpert_com_web
+    volumes:
+      - ./marathonexpert.com/:/var/www/
+    networks:
+      - app-network
+
+  #######################################################################
   #################### powerliftguru.com ################################
   #######################################################################
 
