@@ -2,6 +2,23 @@ version: '3'
 services:
 
   #######################################################################
+  ####################  yourdailyworkouts.com  ################################
+  #######################################################################
+
+  #NodeJS Service
+  yourdailyworkouts_com_nodejs:
+    build:
+      context: .
+      dockerfile: ./yourdailyworkouts.com/docker/nodejs/Dockerfile
+    container_name: "${DOCKER_PREFIX}-yourdailyworkouts-nodejs"
+    depends_on:
+      - yourdailyworkouts_com_web
+    volumes:
+      - ./yourdailyworkouts.com/:/var/www/
+    networks:
+      - app-network
+
+  #######################################################################
   ####################  fillingyoga.com  ################################
   #######################################################################
 
