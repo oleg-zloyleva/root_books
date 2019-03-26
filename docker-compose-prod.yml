@@ -21,6 +21,9 @@ services:
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
 
+      - ./astixlimited.com/:/var/www/astixlimited.com/
+      - ./astixlimited.com/docker/nginx/astixlimited.conf:/etc/nginx/conf.d/astixlimited.conf
+
       - ./powerliftguru.com/:/var/www/powerliftguru.com/
       - ./powerliftguru.com/docker/nginx/powerliftguru.conf:/etc/nginx/conf.d/powerliftguru.conf
 
