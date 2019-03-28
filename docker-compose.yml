@@ -2,6 +2,33 @@ version: '3'
 services:
 
   #######################################################################
+  ####################  astixlimited.com  ################################
+  #######################################################################
+
+
+  #PHP Service
+  astixlimited_com_web:
+    build:
+      context: .
+      dockerfile: ./astixlimited.com/docker/php-fpm/Dockerfile
+    image: digitalocean.com/php
+    container_name: "astixlimited_com-app"
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - db
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/astixlimited.com/
+    volumes:
+      - ./astixlimited.com/:/var/www/astixlimited.com/
+      - ./astixlimited.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+    networks:
+      - app-network
+
+
+  #######################################################################
   ####################  marathonexpert.com  ################################
   #######################################################################
 
@@ -130,6 +157,27 @@ services:
     networks:
       - app-network
 
+  #######################################################################
+  #######################   Services   ##################################
+  #######################################################################
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: "${DOCKER_PREFIX}-db"
+    restart: unless-stopped
+    tty: true
+    #    command: --init-file /etc/mysql/init.sql
+    #    ports:
+    #      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./docker/mysql/:/etc/mysql/
+    networks:
+      - app-network
 
 #Docker Networks
 networks:
