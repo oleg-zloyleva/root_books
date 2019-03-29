@@ -2,6 +2,24 @@ version: '3'
 services:
 
   #######################################################################
+  ##################  astixlimited.com  ########################
+  #######################################################################
+
+  #NodeJS Service
+  astixlimited_com_nodejs:
+    build:
+      context: .
+      dockerfile: ./astixlimited.com/docker/nodejs/Dockerfile
+    container_name: "${DOCKER_PREFIX}-astixlimited-nodejs"
+    depends_on:
+      - astixlimited_com_web
+    volumes:
+      - ./astixlimited.com/:/var/www/
+    networks:
+      - app-network
+
+
+  #######################################################################
   ##################  yourfitnesstrainer365.com  ########################
   #######################################################################
 
