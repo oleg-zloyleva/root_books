@@ -39,6 +39,8 @@ services:
       - ./yourfitnesstrainer365.com/:/var/www/yourfitnesstrainer365.com/
       - ./yourfitnesstrainer365.com/docker/nginx/yourfitnesstrainer365.conf:/etc/nginx/conf.d/yourfitnesstrainer365.conf
 
+      - ./descriptors/:/var/www/descriptors/
+
       - /etc/letsencrypt:/etc/letsencrypt
     networks:
       - app-network

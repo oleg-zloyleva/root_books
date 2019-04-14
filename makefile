@@ -18,6 +18,8 @@ echo:
 help: #prints list of commands
 	@cat ./makefile | grep : | grep -v "grep"
 
+set_user_permit:
+	@sudo chown -R $(USER):$(USER) $(CURDIR)
 
 #####################################
 ###                               ###
