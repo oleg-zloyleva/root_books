@@ -1,0 +1,42 @@
+#footer-unsubscribe {
+  background: linear-gradient(77deg, #3023ae, #53a0fd 48%, #b4ec51);
+  padding: 32px 0;
+  min-height: 80px;
+
+  .footer-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: RobotoRegular, sans-serif;
+
+    li {
+      a {
+        font-size: 15px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #000;
+        margin-right: 53px;
+        letter-spacing: 0.2px;
+
+        &.active {
+          color: #fff;
+          text-shadow: 0 0 2px #000;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 575px) {
+  #footer-unsubscribe {
+    .footer-list {
+      li {
+        a {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
