@@ -21,7 +21,7 @@ $(document).ready(function () {
             valid = false;
         }
 
-        if(valid) {
+        if (valid) {
 
             let form = $(this).serializeArray();
             let sendData = {};
@@ -56,7 +56,7 @@ $(document).ready(function () {
             valid = false;
         }
 
-        if(valid) {
+        if (valid) {
 
             let sendEmail = {};
             sendEmail.email = $('#email').val();
@@ -78,7 +78,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#privacy').on('click', function() {
+    $('#privacy').on('click', function () {
         if ($(this).prop('checked')) {
             $('.cancellation-form__btn').prop('disabled', false);
         } else {
@@ -98,10 +98,10 @@ $(document).ready(function () {
         return true;
     }
 
-    $('input').on('focus', function() {
+    $('input').on('focus', function () {
         $(this).removeClass('inp-required');
     });
 
-    const getUrlMainSite = () => (getEnv() === "prod")?"https://yourdailyworkouts.com":"http://yourdailyworkouts.loc";
+    const getUrlMainSite = () => (getEnv() === "prod") ? "https://yourdailyworkouts.com" : "http://yourdailyworkouts.loc";
 
 });
