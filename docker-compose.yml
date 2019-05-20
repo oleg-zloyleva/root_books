@@ -125,4 +125,3 @@ services:
 #Volumes
 volumes:
   database:
-  composer:
