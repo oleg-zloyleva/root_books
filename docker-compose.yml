@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 services:
 
   #######################################################################
@@ -24,8 +24,6 @@ services:
     volumes:
       - ./astixlimited.com/:/var/www/astixlimited.com/
       - ./astixlimited.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-    networks:
-      - app-network
 
 
   #######################################################################
@@ -51,8 +49,6 @@ services:
     volumes:
       - ./marathonexpert.com/:/var/www/marathonexpert.com/
       - ./marathonexpert.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-    networks:
-      - app-network
 
 
   #######################################################################
@@ -77,8 +73,6 @@ services:
     volumes:
       - ./yourdailyworkouts.com/:/var/www/yourdailyworkouts.com/
       - ./yourdailyworkouts.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-    networks:
-      - app-network
 
 
   #######################################################################
@@ -103,8 +97,6 @@ services:
     volumes:
       - ./yourfitnesstrainer365.com/:/var/www/yourfitnesstrainer365.com/
       - ./yourfitnesstrainer365.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-    networks:
-      - app-network
 
 
   #######################################################################
@@ -129,8 +121,6 @@ services:
     volumes:
       - ./fillingyoga.com/:/var/www/fillingyoga.com/
       - ./fillingyoga.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-    networks:
-      - app-network
 
   #######################################################################
   #################### powerliftguru.com ################################
@@ -154,8 +144,6 @@ services:
     volumes:
       - ./powerliftguru.com/:/var/www/powerliftguru.com/
       - ./powerliftguru.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-    networks:
-      - app-network
 
   #######################################################################
   #######################   Services   ##################################
@@ -176,13 +164,8 @@ services:
     volumes:
       - dbdata:/var/lib/mysql/
       - ./docker/mysql/:/etc/mysql/
-    networks:
-      - app-network
 
-#Docker Networks
-networks:
-  app-network:
-    driver: bridge
+
 #Volumes
 volumes:
   dbdata:

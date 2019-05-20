@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 services:
 
 #  ##############   WEB CONTAINERS   ##############
@@ -42,10 +42,4 @@ services:
       - ./descriptors/:/var/www/descriptors/
 
       - /etc/letsencrypt:/etc/letsencrypt
-    networks:
-      - app-network
 
-#Docker Networks
-networks:
-  app-network:
-    driver: bridge
