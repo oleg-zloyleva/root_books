@@ -5,145 +5,99 @@ services:
   ####################  astixlimited.com  ################################
   #######################################################################
 
-
-  #PHP Service
   astixlimited_com_web:
-    build:
-      context: .
-      dockerfile: ./astixlimited.com/docker/php-fpm/Dockerfile
-    image: digitalocean.com/php
-    container_name: "astixlimited_com-app"
-    restart: unless-stopped
-    tty: true
+    build: docker/php-fpm
     depends_on:
       - db
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
-    working_dir: /var/www/astixlimited.com/
+      - "DOCKER_PHP_CONFIG=${DOCKER_PHP_CONFIG}"
+    working_dir: /var/www/astixlimited.com
     volumes:
-      - ./astixlimited.com/:/var/www/astixlimited.com/
-      - ./astixlimited.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+      - "./astixlimited.com/:/var/www/astixlimited.com/"
+      - "./api/docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini"
+      - "./.composer/:/www/.composer"
 
 
   #######################################################################
   ####################  marathonexpert.com  ################################
   #######################################################################
 
-
-  #PHP Service
   marathonexpert_com_web:
-    build:
-      context: .
-      dockerfile: ./marathonexpert.com/docker/php-fpm/Dockerfile
-    image: digitalocean.com/php
-    container_name: "marathonexpert_com-app"
-    restart: unless-stopped
-    tty: true
+    build: docker/php-fpm
     depends_on:
       - db
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
+      - "DOCKER_PHP_CONFIG=${DOCKER_PHP_CONFIG}"
     working_dir: /var/www/marathonexpert.com/
     volumes:
-      - ./marathonexpert.com/:/var/www/marathonexpert.com/
-      - ./marathonexpert.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-
+      - "./marathonexpert.com/:/var/www/marathonexpert.com/"
+      - "./api/docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini"
+      - "./.composer/:/www/.composer"
 
   #######################################################################
   ####################  yourdailyworkouts.com  ################################
   #######################################################################
 
-  #PHP Service
   yourdailyworkouts_com_web:
-    build:
-      context: .
-      dockerfile: ./yourdailyworkouts.com/docker/php-fpm/Dockerfile
-    image: digitalocean.com/php
-    container_name: "yourdailyworkouts_com-app"
-    restart: unless-stopped
-    tty: true
+    build: docker/php-fpm
     depends_on:
       - db
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
+      - "DOCKER_PHP_CONFIG=${DOCKER_PHP_CONFIG}"
     working_dir: /var/www/yourdailyworkouts.com/
     volumes:
-      - ./yourdailyworkouts.com/:/var/www/yourdailyworkouts.com/
-      - ./yourdailyworkouts.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-
+      - "./yourdailyworkouts.com/:/var/www/yourdailyworkouts.com/"
+      - "./api/docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini"
+      - "./.composer/:/www/.composer"
 
   #######################################################################
   ####################  yourfitnesstrainer365.com  ################################
   #######################################################################
 
-  #PHP Service
   yourfitnesstrainer365_com_web:
-    build:
-      context: .
-      dockerfile: ./yourfitnesstrainer365.com/docker/php-fpm/Dockerfile
-    image: digitalocean.com/php
-    container_name: "yourfitnesstrainer365_com-app"
-    restart: unless-stopped
-    tty: true
+    build: docker/php-fpm
     depends_on:
       - db
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
+      - "DOCKER_PHP_CONFIG=${DOCKER_PHP_CONFIG}"
     working_dir: /var/www/yourfitnesstrainer365.com/
     volumes:
-      - ./yourfitnesstrainer365.com/:/var/www/yourfitnesstrainer365.com/
-      - ./yourfitnesstrainer365.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
-
+      - "./yourfitnesstrainer365.com/:/var/www/yourfitnesstrainer365.com/"
+      - "./api/docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini"
+      - "./.composer/:/www/.composer"
 
   #######################################################################
   ####################  fillingyoga.com  ################################
   #######################################################################
 
-  #PHP Service
   fillingyoga_com_web:
-    build:
-      context: .
-      dockerfile: ./fillingyoga.com/docker/php-fpm/Dockerfile
-    image: digitalocean.com/php
-    container_name: "fillingyoga_com-app"
-    restart: unless-stopped
-    tty: true
+    build: docker/php-fpm
     depends_on:
       - db
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
+      - "DOCKER_PHP_CONFIG=${DOCKER_PHP_CONFIG}"
     working_dir: /var/www/fillingyoga.com/
     volumes:
-      - ./fillingyoga.com/:/var/www/fillingyoga.com/
-      - ./fillingyoga.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+      - "./fillingyoga.com/:/var/www/fillingyoga.com/"
+      - "./api/docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini"
+      - "./.composer/:/www/.composer"
+
 
   #######################################################################
   #################### powerliftguru.com ################################
   #######################################################################
 
-  #PHP Service
   powerliftguru_com_web:
-    build:
-      context: .
-      dockerfile: ./powerliftguru.com/docker/php-fpm/Dockerfile
-    image: digitalocean.com/php
-    container_name: "powerliftguru_com-app"
-    restart: unless-stopped
-    tty: true
+    build: docker/php-fpm
     depends_on:
       - db
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
+      - "DOCKER_PHP_CONFIG=${DOCKER_PHP_CONFIG}"
     working_dir: /var/www/powerliftguru.com/
     volumes:
-      - ./powerliftguru.com/:/var/www/powerliftguru.com/
-      - ./powerliftguru.com/docker/php-fpm/:/usr/local/etc/php/conf.d/
+      - "./powerliftguru.com/:/var/www/powerliftguru.com/"
+      - "./api/docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini"
+      - "./.composer/:/www/.composer"
 
   #######################################################################
   #######################   Services   ##################################
@@ -171,4 +125,4 @@ services:
 #Volumes
 volumes:
   database:
-
+  composer:

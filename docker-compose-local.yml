@@ -65,21 +65,16 @@ services:
 
   #PHP Service
   app_api:
-    build:
-      context: .
-      dockerfile: ./api/docker/php-fpm/Dockerfile.local
-    image: digitalocean.com/php
-    container_name: "${DOCKER_PREFIX_API}-app"
-    restart: unless-stopped
+    build: docker/php-fpm
     depends_on:
       - db_api
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
+      - "DOCKER_PHP_CONFIG=${DOCKER_PHP_CONFIG}"
     working_dir: /var/www
     volumes:
-      - ./api/:/var/www
-      - ./api/docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - "./api/:/var/www"
+      - "./api/docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini"
+      - "./.composer/:/www/.composer"
 
   #Nginx Service
   webserver_api:
