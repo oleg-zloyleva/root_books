@@ -93,3 +93,13 @@ fresh:
 	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/yourdailyworkouts.com/ 			yourdailyworkouts_com_web				php artisan migrate:fresh --seed
 	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/yourfitnesstrainer365.com/ 		yourfitnesstrainer365_com_web			php artisan migrate:fresh --seed
 
+
+vendor:
+	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/ 									app_api									composer install
+	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/astixlimited.com/ 					astixlimited_com_web					composer install
+	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/fillingyoga.com/ 					fillingyoga_com_web						composer install
+	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/marathonexpert.com/ 				marathonexpert_com_web					composer install
+	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/powerliftguru.com/ 				powerliftguru_com_web					composer install
+	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/yourdailyworkouts.com/ 			yourdailyworkouts_com_web				composer install
+	@docker-compose ${DOCKER_CONFIG} exec -u www -w /var/www/yourfitnesstrainer365.com/ 		yourfitnesstrainer365_com_web			composer install
+
