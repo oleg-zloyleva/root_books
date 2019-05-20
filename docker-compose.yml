@@ -149,23 +149,26 @@ services:
   #######################   Services   ##################################
   #######################################################################
 
-  #MySQL Service
   db:
-    image: mysql:5.7.22
-    container_name: "${DOCKER_PREFIX}-db"
-    restart: unless-stopped
-    tty: true
-    #    command: --init-file /etc/mysql/init.sql
-    #    ports:
-    #      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
+    image: mysql/mysql-server:5.7
     volumes:
-      - dbdata:/var/lib/mysql/
-      - ./docker/mysql/:/etc/mysql/
-
+      - "database:/var/lib/mysql"
+      - "./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql"
+    environment:
+      - "MYSQL_ROOT_HOST=%"
+      - "MYSQL_ROOT_PASSWORD=${DB_PASSWORD}"
+    command: [
+      # "--general_log=1",
+      # "--general_log_file=/var/lib/mysql/general_log.log",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_general_ci",
+      "--default-storage-engine=innodb",
+      "--innodb-file-per-table",
+      "--explicit_defaults_for_timestamp=1",
+      "--default-time-zone=+00:00"
+    ]
 
 #Volumes
 volumes:
-  dbdata:
+  database:
+

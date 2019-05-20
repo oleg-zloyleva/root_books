@@ -26,9 +26,7 @@ services:
 
   #Nginx Service
   webserver:
-    image: nginx:alpine
-    container_name: "${DOCKER_PREFIX}-webserver"
-    restart: unless-stopped
+    image: nginx:1.16-alpine
     depends_on:
       - astixlimited_com_web
       - powerliftguru_com_web
@@ -41,6 +39,7 @@ services:
       - "443:443"
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./descriptors/:/var/www/descriptors/
 
       - ./astixlimited.com/:/var/www/astixlimited.com/
       - ./astixlimited.com/docker/nginx/local.conf:/etc/nginx/conf.d/astixlimited.conf
@@ -59,8 +58,6 @@ services:
 
       - ./yourfitnesstrainer365.com/:/var/www/yourfitnesstrainer365.com/
       - ./yourfitnesstrainer365.com/docker/nginx/local.conf:/etc/nginx/conf.d/yourfitnesstrainer365.conf
-
-      - ./descriptors/:/var/www/descriptors/
 
 #  ###############################################
 #  ##############   API CONTAINERS  ##############
@@ -86,9 +83,7 @@ services:
 
   #Nginx Service
   webserver_api:
-    image: nginx:alpine
-    container_name: "${DOCKER_PREFIX_API}-webserver"
-    restart: unless-stopped
+    image: nginx:1.16-alpine
     depends_on:
       - app_api
     ports:
@@ -100,23 +95,25 @@ services:
 
   #MySQL Service
   db_api:
-    image: mysql:5.7.22
-    container_name: "${DOCKER_PREFIX_API}-db"
-    restart: unless-stopped
-    ports:
-      - "4406:3306"
-    environment:
-      MYSQL_DATABASE: ${DB_DATABASE_API}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD_API}
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+    image: mysql/mysql-server:5.7
     volumes:
-      - db_api_data:/var/lib/mysql/
-      - ./api/docker/mysql/:/etc/mysql/
+      - "database_api:/var/lib/mysql"
+    environment:
+      - "MYSQL_ROOT_HOST=%"
+      - "MYSQL_ROOT_PASSWORD=${DB_PASSWORD_API}"
+      - "MYSQL_DATABASE=${DB_DATABASE_API}"
+    command: [
+      # "--general_log=1",
+      # "--general_log_file=/var/lib/mysql/general_log.log",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_general_ci",
+      "--default-storage-engine=innodb",
+      "--innodb-file-per-table",
+      "--explicit_defaults_for_timestamp=1",
+      "--default-time-zone=+00:00"
+    ]
 
 #Volumes
 volumes:
-  dbdata:
-    driver: local
-  db_api_data:
-    driver: local
+  database_api:
+

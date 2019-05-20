@@ -45,11 +45,11 @@ show: #show docker's containers
 connect_powerliftguru_app: #Connect
 	@sudo docker exec -it powerliftguru_com-app bash
 
-connect_db: #Connect
-	@sudo docker exec -it $(db) bash
+# connect_db: #Connect
+# 	@sudo docker exec -it $(db) bash
 
-connect_webserver: #Connect
-	@sudo docker exec -it $(webserver) /bin/sh
+# connect_webserver: #Connect
+# 	@sudo docker exec -it $(webserver) /bin/sh
 
 
 
@@ -60,9 +60,25 @@ up:
 down:
 	@docker-compose ${DOCKER_CONFIG} down
 
+down-volume:
+	@docker-compose ${DOCKER_CONFIG} down -v
+
+build:
+	@docker-compose ${DOCKER_CONFIG} build
+
 ps:
 	@docker-compose ${DOCKER_CONFIG} ps
+
+
+
+connect_db:
+	@docker-compose ${DOCKER_CONFIG} exec db bash
+
+connect_db_api:
+	@docker-compose ${DOCKER_CONFIG} exec db_api bash
 
 connect_node:
 	@docker-compose ${DOCKER_CONFIG} exec nodejs sh
 
+connect_webserver:
+	@docker-compose ${DOCKER_CONFIG} exec webserver sh
