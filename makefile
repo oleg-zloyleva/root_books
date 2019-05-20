@@ -50,3 +50,19 @@ connect_db: #Connect
 
 connect_webserver: #Connect
 	@sudo docker exec -it $(webserver) /bin/sh
+
+
+
+
+up:
+	@docker-compose ${DOCKER_CONFIG} up -d
+
+down:
+	@docker-compose ${DOCKER_CONFIG} down
+
+ps:
+	@docker-compose ${DOCKER_CONFIG} ps
+
+connect_node:
+	@docker-compose ${DOCKER_CONFIG} exec nodejs sh
+

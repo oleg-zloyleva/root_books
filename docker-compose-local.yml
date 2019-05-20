@@ -1,106 +1,27 @@
 version: '3'
 services:
 
-  #######################################################################
-  ##################  astixlimited.com  ########################
-  #######################################################################
-
-  #NodeJS Service
-  astixlimited_com_nodejs:
-    build:
-      context: .
-      dockerfile: ./astixlimited.com/docker/nodejs/Dockerfile
-    container_name: "${DOCKER_PREFIX}-astixlimited-nodejs"
+  # NodeJS Services
+  nodejs:
+    build: docker/nodejs
+    user: 1000:1000
+    working_dir: /var/www
     depends_on:
       - astixlimited_com_web
-    volumes:
-      - ./astixlimited.com/:/var/www/
-    networks:
-      - app-network
-
-
-  #######################################################################
-  ##################  yourfitnesstrainer365.com  ########################
-  #######################################################################
-
-  #NodeJS Service
-  yourfitnesstrainer365_com_nodejs:
-    build:
-      context: .
-      dockerfile: ./yourfitnesstrainer365.com/docker/nodejs/Dockerfile
-    container_name: "${DOCKER_PREFIX}-yourfitnesstrainer365-nodejs"
-    depends_on:
+      - powerliftguru_com_web
+      - fillingyoga_com_web
+      - marathonexpert_com_web
+      - yourdailyworkouts_com_web
       - yourfitnesstrainer365_com_web
     volumes:
-      - ./yourfitnesstrainer365.com/:/var/www/
-    networks:
-      - app-network
+      - "./api/:/var/www/api"
 
-  #######################################################################
-  ####################  yourdailyworkouts.com  ################################
-  #######################################################################
-
-  #NodeJS Service
-  yourdailyworkouts_com_nodejs:
-    build:
-      context: .
-      dockerfile: ./yourdailyworkouts.com/docker/nodejs/Dockerfile
-    container_name: "${DOCKER_PREFIX}-yourdailyworkouts-nodejs"
-    depends_on:
-      - yourdailyworkouts_com_web
-    volumes:
-      - ./yourdailyworkouts.com/:/var/www/
-    networks:
-      - app-network
-
-  #######################################################################
-  ####################  fillingyoga.com  ################################
-  #######################################################################
-
-  #NodeJS Service
-  fillingyoga_com_nodejs:
-    build:
-      context: .
-      dockerfile: ./fillingyoga.com/docker/nodejs/Dockerfile
-    container_name: "${DOCKER_PREFIX}-fillingyoga-nodejs"
-    depends_on:
-      - fillingyoga_com_web
-    volumes:
-      - ./fillingyoga.com/:/var/www/
-    networks:
-      - app-network
-
-  #######################################################################
-  ###################  marathonexpert.com  ##############################
-  #######################################################################
-
-  #NodeJS Service
-  marathonexpert_com_nodejs:
-    build:
-      context: .
-      dockerfile: ./marathonexpert.com/docker/nodejs/Dockerfile
-    container_name: "${DOCKER_PREFIX}-marathonexpert-nodejs"
-    depends_on:
-      - marathonexpert_com_web
-    volumes:
-      - ./marathonexpert.com/:/var/www/
-    networks:
-      - app-network
-
-  #######################################################################
-  #################### powerliftguru.com ################################
-  #######################################################################
-
-  #NodeJS Service
-  powerliftguru_com_nodejs:
-    build:
-      context: .
-      dockerfile: ./powerliftguru.com/docker/nodejs/Dockerfile
-    container_name: "${DOCKER_PREFIX}-powerliftguru-nodejs"
-    depends_on:
-      - powerliftguru_com_web
-    volumes:
-      - ./powerliftguru.com/:/var/www/
+      - "./astixlimited.com/:/var/www/astixlimited.com/"
+      - "./yourfitnesstrainer365.com/:/var/www/yourfitnesstrainer365.com/"
+      - "./yourdailyworkouts.com/:/var/www/yourdailyworkouts.com/"
+      - "./fillingyoga.com/:/var/www/fillingyoga.com/"
+      - "./marathonexpert.com/:/var/www/marathonexpert.com/"
+      - "./powerliftguru.com/:/var/www/powerliftguru.com/"
     networks:
       - app-network
 
@@ -112,6 +33,7 @@ services:
     restart: unless-stopped
     tty: true
     depends_on:
+      - astixlimited_com_web
       - powerliftguru_com_web
       - fillingyoga_com_web
       - marathonexpert_com_web
@@ -206,22 +128,11 @@ services:
     networks:
       - app-network
 
-  nodejs_api:
-    build:
-      context: .
-      dockerfile: ./api/docker/nodejs/Dockerfile
-    container_name: "${DOCKER_PREFIX_API}-nodejs"
-    depends_on:
-      - app_api
-    volumes:
-      - ./api/:/var/www
-    networks:
-      - app-network
-
 #Docker Networks
 networks:
   app-network:
     driver: bridge
+
 #Volumes
 volumes:
   dbdata:
